@@ -29,7 +29,7 @@
     </main>
 
     <script>
-
+        fetchTodoItems()
         const todoForm = document.querySelector("#todoForm");
         todoForm.addEventListener("submit", handleSubmit);
 
@@ -57,6 +57,7 @@
 
                         if (data.success) {
                             document.querySelector("#todoInput").value = '';
+                            fetchTodoItems();
                         }
 
 
@@ -75,7 +76,20 @@
 
         function fetchTodoItems() {
 
+            const todoList = document.querySelector("#todoList");
+            todoList.innerHTML = '';
 
+            fetch('http://localhost/php/fetchtodo.php')
+                .then(response => response.json())
+                .then(data => {
+
+                    data.forEach(item => {
+
+                        todoList.innerHTML += `<div class="alert alert-success mt-2">${item.title}</div>`
+
+                    })
+
+                })
 
         }
 
