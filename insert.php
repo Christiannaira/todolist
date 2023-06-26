@@ -2,9 +2,9 @@
 
 include 'connect.php';
 
-$firstname = 'Christian';
+$firstname = 'Jewer';
 $lastname = 'Naira';
-$grade = 99;
+$grade = 100;
 
 $sql = "INSERT INTO users(firstname, lastname, grade)
         VALUES ('$firstname', '$lastname', '$grade')";
