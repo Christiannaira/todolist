@@ -30,7 +30,43 @@
 
     <script>
 
+        const todoForm = document.querySelector("#todoForm");
+        todoForm.addEventListener("submit", handleSubmit);
+
         function handleSubmit(event) {
+
+            event.preventDefault();
+
+            const todoInput = document.querySelector("#todoInput").value;
+
+            if (todoInput !== '') {
+
+                fetch('http://localhost/php/newtodo.php', {
+
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: todoInput
+                    })
+
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.success) {
+                            document.querySelector("#todoInput").value = '';
+                        }
+
+
+                    })
+
+            } else {
+
+                alert("field should not be empty!");
+
+            }
 
 
 
