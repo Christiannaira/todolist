@@ -29,6 +29,8 @@
     </main>
 
     <script>
+        const url = 'http://localhost/php/';
+
         fetchTodoItems()
         const todoForm = document.querySelector("#todoForm");
         todoForm.addEventListener("submit", handleSubmit);
@@ -41,7 +43,7 @@
 
             if (todoInput !== '') {
 
-                fetch('http://localhost/php/newtodo.php', {
+                fetch(url + 'newtodo.php', {
 
                     method: 'POST',
                     headers: {
@@ -79,7 +81,7 @@
             const todoList = document.querySelector("#todoList");
             todoList.innerHTML = '';
 
-            fetch('http://localhost/php/fetchtodo.php')
+            fetch(url + 'fetchtodo.php')
                 .then(response => response.json())
                 .then(data => {
 
@@ -107,7 +109,7 @@
 
         function markComplete(todoId) {
 
-            fetch(`http://localhost/php/completetodos.php?id=${todoId}`)
+            fetch(`${url}completetodos.php?id=${todoId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
