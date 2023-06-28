@@ -85,10 +85,34 @@
 
                     data.forEach(item => {
 
-                        todoList.innerHTML += `<div class="alert alert-success mt-2">${item.title}</div>`
+                        if (item.status === 'pending') {
+
+                            todoList.innerHTML += `<div class="alert alert-light mt-2">
+                            
+                            <button class="btn btn-primary" onclick="markComplete(${item.id})">${item.status}</button>
+                            ${item.title}</div>`
+
+                        } else {
+
+                            todoList.innerHTML += `<div class="alert alert-success mt-2">${item.title}</div>`
+
+                        }
+
 
                     })
 
+                })
+
+        }
+
+        function markComplete(todoId) {
+
+            fetch(`http://localhost/php/completetodos.php?id=${todoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        fetchTodoItems();
+                    }
                 })
 
         }
